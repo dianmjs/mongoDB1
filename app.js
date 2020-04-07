@@ -1,8 +1,36 @@
 const express = require("express");
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("<h1>HcUy6Re2LLBRtj</h1>");
+let usuario = {
+  nombre: "",
+};
+let respuesta = {
+  error: false,
+  codigo: 200,
+  mensaje: "",
+};
+
+app.get("/usuario", function (req, res) {
+  respuesta = {
+    error: false,
+    codigo: 200,
+    mensaje: "",
+  };
+  if (usuario.nombre === "") {
+    respuesta = {
+      error: true,
+      codigo: 501,
+      mensaje: "Hola desconocido!",
+    };
+  } else {
+    respuesta = {
+      error: false,
+      codigo: 200,
+      mensaje: "respuesta del usuario",
+      respuesta: "Hola" + usuario + "!",
+    };
+  }
+  res.send(respuesta);
 });
 
 app.listen(3000, () => console.log("Listening on port 3000!"));
